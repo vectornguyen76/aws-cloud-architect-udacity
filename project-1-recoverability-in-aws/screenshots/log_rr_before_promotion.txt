@@ -1,0 +1,64 @@
+PS C:\Users\Dell\.ssh> ssh -i my-keypair.pem ec2-user@35.165.231.49
+The authenticity of host '35.165.231.49 (35.165.231.49)' can't be established.
+ECDSA key fingerprint is SHA256:5ej8mgzOIxvknFg78P1VST9Mf97HKbLD1dyWS3LOe5w.
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Warning: Permanently added '35.165.231.49' (ECDSA) to the list of known hosts.
+   ,     #_
+   ~\_  ####_        Amazon Linux 2023
+  ~~  \_#####\
+  ~~     \###|
+  ~~       \#/ ___   https://aws.amazon.com/linux/amazon-linux-2023
+   ~~       V~' '->
+    ~~~         /
+      ~~._.   _/
+         _/ _/
+       _/m/'
+[ec2-user@ip-10-2-10-102 ~]$ mysql -u admin -p -h udacity-read-replica.c1g6kuig8c4t.us-west-2.rds.amazonaws.com
+Enter password:
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 360
+Server version: 8.0.35 Source distribution
+
+Copyright (c) 2000, 2024, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| sys                |
+| udacity            |
++--------------------+
+5 rows in set (0.01 sec)
+
+mysql> USE udacity;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+mysql> SHOW TABLES;
++-------------------+
+| Tables_in_udacity |
++-------------------+
+| person            |
++-------------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT * FROM person;
++--------+------+------------+
+| name   | sex  | birth      |
++--------+------+------------+
+| Vector | m    | 2000-06-07 |
++--------+------+------------+
+1 row in set (0.01 sec)
+
+mysql> INSERT INTO person VALUES ('Sudo','m','2000-07-07');
+ERROR 1290 (HY000): The MySQL server is running with the --read-only option so it cannot execute this statement
