@@ -1,0 +1,28 @@
+﻿Estimate summary,,,,,,,,,
+Upfront cost,Monthly cost,Total 12 months cost,Currency,,,,,,
+0,18762.82,225153.84,USD,,,,,,
+,,* Includes upfront cost,,,,,,,
+,,,,,,,,,
+,,,,,,,,,
+Detailed Estimate,,,,,,,,,
+Group hierarchy,Region,Description,Service,Upfront,Monthly,First 12 months total,Currency,Status,Configuration summary
+My Estimate,US East (N. Virginia),,Amazon Route 53,0,183.5,2202,USD,,"Number of Elastic Network Interfaces (2), Hosted Zones (2)"
+My Estimate,US East (N. Virginia),,Application Load Balancer,0,79.57,954.84,USD,,Number of Application Load Balancers (2)
+My Estimate,US East (N. Virginia),,VPN Connection,0,36.5,438,USD,,"Working days per month (22), Number of Site-to-Site VPN Connections (1)"
+My Estimate,US East (N. Virginia),,Amazon EC2 ,0,4878.08,58536.96,USD,,"Tenancy (Shared Instances), Operating system (Linux), Workload (Consistent, Number of instances: 8), Advance EC2 instance (m5a.4xlarge), Pricing strategy (On-Demand Utilization: 100 %Utilized/Month), Enable monitoring (disabled), EBS Storage amount (1 TB), DT Inbound: Internet (0 TB per month), DT Outbound: Not selected (0 TB per month), DT Intra-Region: (10 TB per month)"
+My Estimate,US East (N. Virginia),,Amazon RDS for MySQL,0,13397.4,160768.8,USD,,"Storage amount (10 TB), Storage for each RDS instance (General Purpose SSD (gp2)), Nodes (2), Instance type (db.m5.8xlarge), Utilization (On-Demand only) (100 %Utilized/Month), Deployment option (Multi-AZ), Pricing strategy (OnDemand)"
+My Estimate,US East (N. Virginia),,S3 Standard,0,80.25,963,USD,,"S3 Standard storage (1 TB per month), PUT, COPY, POST, LIST requests to S3 Standard (10000000), GET, SELECT, and all other requests from S3 Standard (10000000), Data returned by S3 Select (1000 GB per month), Data scanned by S3 Select (1000 GB per month)"
+My Estimate,US East (N. Virginia),,Data Transfer,0,0,0,USD,,
+My Estimate,US East (N. Virginia),,Amazon CloudFront,0,107.52,1290.24,USD,,"Data transfer out to internet (1 TB per month), Data transfer out to origin (1 TB per month)"
+,,,,,,,,,
+,,,,,,,,,
+,,,,,,,,,
+Acknowledgement,,,,,,,,,
+"* AWS Pricing Calculator provides only an estimate of your AWS fees and doesn't include any taxes that might apply. Your actual fees depend on a variety of factors, including your actual usage of AWS services.",,,,,,,,,
+,,,,,,,,,
+,,,,,,,,,
+Rationale: Increase resources,,,,,,,,,
+Changes been made,,,,,,,,,
+The ec2-instance service - increased with two ec2 instances.,,,,,,,,,
+ RDS service increased to db.m5.8xlarge vCPU: 32 Memory: 128 GiB. Increased  backup storage to 10 TB. It provides increased resilience and redundancy with its multi-region deployment.,,,,,,,,,
+"Added Amazon CloudWatch, to collect various logs and notify me during any alarms. ",,,,,,,,,
