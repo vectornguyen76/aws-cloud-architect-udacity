@@ -1,0 +1,18 @@
+Research and analyze which of the vulnerabilities appear to be related to the code that was deployed for the environment in this project.
+
+1. IAM policy is not following the principle of least privilege, allowing full access to resources. 
+2. The use of a non-root account is not enforced.
+3. CloudTrail Trail is not specified.
+4. Loadbalancer does not have HTTP->HTTPS redirection
+5. VPC Security Groups allow all ingress and egress traffic which violates the AWS recommendation.
+6. TCP port 5000 is reachable from the internet on the EC2 instance.
+7. Server-side encryption and logging is not enabled for S3 buckets
+
+Recommendations on how to remediate the vulnerabilities
+
+1. Set IAM policies for not allowing root user and to enforce MFA, as well as the specific permissions.
+2. Create a CloudTrail that is stored on S3.
+3. Application Load Balancer should be configured to redirect all HTTP requests to HTTPS
+4. Limit the traffic on the Security Groups only allow 80 and 443 as well as reference the other security group for accessing AWS resource within VPC.
+5. Disable all other non-necessary ports on the EC2 instance.
+6. Enable S3 server-side encryption and logging
