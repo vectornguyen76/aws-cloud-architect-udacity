@@ -1,18 +1,18 @@
-Research and analyze which of the vulnerabilities appear to be related to the code that was deployed for the environment in this project.
+Research and analyze which of the vulnerabilities appear to be related to the code that was deployed for the environment in this project:
 
-1. IAM policy is not following the principle of least privilege, allowing full access to resources. 
-2. The use of a non-root account is not enforced.
-3. CloudTrail Trail is not specified.
-4. Loadbalancer does not have HTTP->HTTPS redirection
-5. VPC Security Groups allow all ingress and egress traffic which violates the AWS recommendation.
-6. TCP port 5000 is reachable from the internet on the EC2 instance.
-7. Server-side encryption and logging is not enabled for S3 buckets
+1. **IAM Policy Not Following the Principle of Least Privilege**: The deployed IAM policy grants full access to resources, violating the least privilege principle.
+2. **Use of a Non-Root Account Not Enforced**: There is no enforcement to ensure the use of non-root accounts, which is a best practice for security.
+3. **CloudTrail Trail Not Specified**: CloudTrail, which is crucial for logging and monitoring API activity, is not configured.
+4. **Load Balancer Lacks HTTP to HTTPS Redirection**: The application load balancer does not redirect HTTP traffic to HTTPS, exposing data to potential interception.
+5. **VPC Security Groups Allow All Ingress and Egress Traffic**: Security groups are too permissive, allowing all ingress and egress traffic, contrary to AWS recommendations.
+6. **TCP Port 5000 Reachable from the Internet on EC2 Instance**: The EC2 instance is accessible from the internet on TCP port 5000, posing a security risk.
+7. **S3 Buckets Lack Server-Side Encryption and Logging**: Server-side encryption and logging are not enabled for S3 buckets, which are important for data security and compliance.
 
-Recommendations on how to remediate the vulnerabilities
+Recommendations on how to remediate the vulnerabilities:
 
-1. Set IAM policies for not allowing root user and to enforce MFA, as well as the specific permissions.
-2. Create a CloudTrail that is stored on S3.
-3. Application Load Balancer should be configured to redirect all HTTP requests to HTTPS
-4. Limit the traffic on the Security Groups only allow 80 and 443 as well as reference the other security group for accessing AWS resource within VPC.
-5. Disable all other non-necessary ports on the EC2 instance.
-6. Enable S3 server-side encryption and logging
+1. **Set IAM Policies**: Enforce the use of non-root accounts and enable multi-factor authentication (MFA). Define specific permissions based on roles and tasks to adhere to the principle of least privilege.
+2. **Create a CloudTrail**: Configure CloudTrail to log and monitor API activity, and store the logs in an S3 bucket for audit and review purposes.
+3. **Configure HTTP to HTTPS Redirection**: Set up the application load balancer to automatically redirect all HTTP requests to HTTPS, ensuring secure communication.
+4. **Limit Traffic on Security Groups**: Restrict security group rules to allow only necessary traffic, such as ports 80 (HTTP) and 443 (HTTPS), and reference other security groups for internal communication within the VPC.
+5. **Disable Unnecessary Ports on EC2 Instances**: Close all non-essential ports on the EC2 instance, particularly port 5000, to minimize exposure to potential attacks.
+6. **Enable S3 Server-Side Encryption and Logging**: Activate server-side encryption and logging for all S3 buckets to protect data at rest and maintain comprehensive access logs.

@@ -1,8 +1,12 @@
 # Describe GuardDuty findings that were detected related to the brute force attack
 
-It was detected: UnauthorizedAccess:EC2/SSHBruteForce 
-Description: 54.174.170.114 is performing SSH brute force attacks against i-0b6debe3264d5d0a3 (Web Service Instance - C3) . Brute force attacks are used to gain unauthorized access to your instance by guessing the SSH password
+**Detected Finding:** UnauthorizedAccess:EC2/SSHBruteForce  
+**Description:** The IP address 54.174.170.114 is performing SSH brute force attacks against the instance i-0b6debe3264d5d0a3 (Web Service Instance - C3). Brute force attacks attempt to gain unauthorized access by guessing the SSH password.
 
-# Research the AWS Guard Duty documentation page and explain how GuardDuty may have detected this attack - i.e. what was its source of information.
-Accordingly to https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_concepts.html : "To detect unauthorized and unexpected activity in your AWS environment, GuardDuty analyzes and processes data from AWS CloudTrail event logs, VPC Flow Logs, and DNS logs to detect anomalies involving the following AWS resource types: IAM Access Keys, EC2 Instances, and S3 Buckets. While in transit from these data sources to GuardDuty, all of the log data is encrypted. GuardDuty extracts various fields from these logs for profiling and anomaly detection, and then discards the logs.".
-The source of information for this exercise could be found in the VPC Flow Logs, stored on S3.
+# Research the AWS GuardDuty documentation page and explain how GuardDuty may have detected this attack - i.e. what was its source of information.
+
+According to the [AWS GuardDuty documentation](https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_concepts.html):
+
+"To detect unauthorized and unexpected activity in your AWS environment, GuardDuty analyzes and processes data from AWS CloudTrail event logs, VPC Flow Logs, and DNS logs to detect anomalies involving the following AWS resource types: IAM Access Keys, EC2 Instances, and S3 Buckets. While in transit from these data sources to GuardDuty, all of the log data is encrypted. GuardDuty extracts various fields from these logs for profiling and anomaly detection, and then discards the logs."
+
+In this case, the source of information for detecting the SSH brute force attack likely came from the VPC Flow Logs. These logs, which are stored on S3, provide detailed information about the traffic to and from the EC2 instance, enabling GuardDuty to identify patterns consistent with brute force attacks.

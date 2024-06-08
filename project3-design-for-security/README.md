@@ -78,23 +78,23 @@ We will utilize the AWS CLI in this guide, however you are welcome to use the AW
 #### 1. From the root directory of the repository - execute the below command to deploy the templates.
  
 ##### Deploy the S3 buckets
-```
+```bash
 aws cloudformation create-stack --region us-east-1 --stack-name c3-s3 --template-body file://starter/c3-s3.yml
 ```
  
 Expected example output:
-```
+```yaml
 {
     "StackId": "arn:aws:cloudformation:us-east-1:4363053XXXXXX:stack/c3-s3/70dfd370-2118-11ea-aea4-12d607a4fd1c"
 }
 ```
 ##### Deploy the VPC and Subnets
-```
+```bash
 aws cloudformation create-stack --region us-east-1 --stack-name c3-vpc --template-body file://starter/c3-vpc.yml
 ```
  
 Expected example output:
-```
+```yaml
 {
     "StackId": "arn:aws:cloudformation:us-east-1:4363053XXXXXX:stack/c3-vpc/70dfd370-2118-11ea-aea4-12d607a4fd1c"
 }
@@ -102,12 +102,12 @@ Expected example output:
  
 ##### Deploy the Application Stack 
 You will need to specify a pre-existing key-pair name.
-```
+```bash
 aws cloudformation create-stack --region us-east-1 --stack-name c3-app --template-body file://starter/c3-app.yml --parameters ParameterKey=KeyPair,ParameterValue=<add your key pair name here> --capabilities CAPABILITY_IAM
 ```
  
 Expected example output:
-```
+```yaml
 {
     "StackId": "arn:aws:cloudformation:us-east-1:4363053XXXXXX:stack/c3-app/70dfd370-2118-11ea-aea4-12d607a4fd1c"
 }
@@ -138,20 +138,20 @@ You can get these from the Outputs section of the **c3-app** stack.
 Upload the free recipes to the free recipe S3 bucket from step 2. Do this by typing this command into the console (you will replace `<BucketNameRecipesFree>` with your bucket name):
  
 Example:  
-```
-aws s3 cp free_recipe.txt s3://<BucketNameRecipesFree>/ --region us-east-1
+```bash
+aws s3 cp ./starter/free_recipe.txt s3://<BucketNameRecipesFree>/ --region us-east-1
 ```
  
 Upload the secret recipes to the secret recipe S3 bucket from step 2. Do this by typing this command into the console (you will replace `<BucketNameRecipesSecret>` with your bucket name):
  
 Example:  
-```
-aws s3 cp secret_recipe.txt s3://<BucketNameRecipesSecret>/ --region us-east-1
+```bash
+aws s3 cp ./starter/secret_recipe.txt s3://<BucketNameRecipesSecret>/ --region us-east-1
 ```
  
 #### 4. Test the application
 Invoke the web service using the application load balancer URL:
-```
+```bash
 http://<ApplicationURL>/free_recipe
 ```
 You should receive a recipe for banana bread.
@@ -237,7 +237,7 @@ The above instructions are for macOS X users.  For further guidance and other op
  
 #### 1. Log in to the attack simulation server using your SSH key pair.
 #### 2. Run the below commands to start a brute force attack against the application server.  You will need the application server hostname for this.
-```
+```bash
 date
 hydra -l ubuntu -P rockyou.txt ssh://<YourApplicationServerDnsNameHere>
 ```
@@ -265,12 +265,13 @@ Imagine a scenario where API keys used by the application server to read data fr
  
 #### 1. Run the following API calls to view and download files from the secret recipes S3 bucket.  You will need the name of the S3 bucket for this.
  
-```
+```bash
 # view the files in the secret recipes bucket
 aws s3 ls  s3://<BucketNameRecipesSecret>/ --region us-east-1
+aws s3 ls  s3://cand-c3-secret-recipes-431766885376/ --region us-east-1
  
 # download the files
-aws s3 cp s3://<BucketNameRecipesSecret>/secret_recipe.txt  .  --region us-east-1
+aws s3 cp s3://cand-c3-secret-recipes-431766885376/secret_recipe.txt  .  --region us-east-1
 
 # view contents of the file
 cat secret_recipe.txt
