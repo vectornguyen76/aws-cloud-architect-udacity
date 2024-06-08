@@ -1,6 +1,6 @@
 # Describe GuardDuty findings that were detected related to the brute force attack
 
-**Detected Finding:** UnauthorizedAccess:EC2/SSHBruteForce  
+**Detected Finding:** UnauthorizedAccess:EC2/SSHBruteForce
 **Description:** The IP address 54.174.170.114 is performing SSH brute force attacks against the instance i-0b6debe3264d5d0a3 (Web Service Instance - C3). Brute force attacks attempt to gain unauthorized access by guessing the SSH password.
 
 # Research the AWS GuardDuty documentation page and explain how GuardDuty may have detected this attack - i.e. what was its source of information.

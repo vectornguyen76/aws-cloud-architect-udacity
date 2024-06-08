@@ -27,7 +27,7 @@ data "aws_subnet" "public" {
 # Create 4 t2.micro instances named Udacity T2
 resource "aws_instance" "t2_micro" {
   count         = 4
-  ami           = "ami-05543abe7b00118ff"  
+  ami           = "ami-05543abe7b00118ff"
   instance_type = "t2.micro"
   subnet_id     = data.aws_subnet.public.id
 
@@ -39,10 +39,10 @@ resource "aws_instance" "t2_micro" {
 # # Create 2 m4.large instances named Udacity M4
 # resource "aws_instance" "m4_large" {
 #   count         = 2
-#   ami           = "ami-05543abe7b00118ff"  
+#   ami           = "ami-05543abe7b00118ff"
 #   instance_type = "m4.large"
 #   subnet_id     = data.aws_subnet.public.id
-# 
+#
 #   tags = {
 #     Name = "Udacity M4"
 #   }

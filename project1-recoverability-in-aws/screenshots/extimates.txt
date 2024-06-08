@@ -1,11 +1,11 @@
 ﻿### Recovery Time Objective (RTO) and Recovery Point Objective (RPO) for Multi-AZ, Multi-Region Database
 
 1. **Minimum RTO for a Single AZ Outage**
-   
+
    In a Multi-AZ configuration, the failover process to another Availability Zone (AZ) occurs automatically. This process typically takes a few minutes to complete, ensuring that the database remains available with minimal disruption.
 
 2. **Minimum RTO for a Single Region Outage**
-   
+
    The process for recovering from a single region outage involves several steps:
 
    - **00:00:** Problem occurs (0 minutes).

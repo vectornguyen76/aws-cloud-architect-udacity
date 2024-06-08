@@ -86,4 +86,3 @@ resource "aws_lambda_function" "geeting_lambda" {
 
   depends_on = [aws_iam_role_policy_attachment.lambda_logs_policy, aws_cloudwatch_log_group.lambda_log_group]
 }
-
