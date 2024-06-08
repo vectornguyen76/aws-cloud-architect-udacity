@@ -268,7 +268,6 @@ Imagine a scenario where API keys used by the application server to read data fr
 ```bash
 # view the files in the secret recipes bucket
 aws s3 ls  s3://<BucketNameRecipesSecret>/ --region us-east-1
-aws s3 ls  s3://cand-c3-secret-recipes-431766885376/ --region us-east-1
  
 # download the files
 aws s3 cp s3://cand-c3-secret-recipes-431766885376/secret_recipe.txt  .  --region us-east-1
@@ -325,7 +324,7 @@ Submit answer in E4T1.txt
 
 1. To disable SSH password login on the application server instance.
 
-```
+```bash
 # open the file /etc/ssh/sshd_config
 sudo vi /etc/ssh/sshd_config
 

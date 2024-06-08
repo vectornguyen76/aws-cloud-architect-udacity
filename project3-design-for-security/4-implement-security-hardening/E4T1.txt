@@ -1,12 +1,11 @@
-# Identify 2-3 changes that can be made to our environment to prevent an ssh brute force attack from the internet.
+# Identify 2-3 changes that can be made to our environment to prevent an SSH brute force attack from the internet.
 
-- Disable password login on the application server
-- Restrict network traffic that can reach the application server
-- Allow SSH only for users with specific roles or using using Session Manager.
+- Disable Password Login on the Application Server: Ensure that SSH access is only possible using key-based authentication, eliminating the possibility of brute force password attacks.
+- Restrict Network Traffic: Implement strict security group rules to limit SSH access to the application server from specific IP addresses or networks.
+- Allow SSH Only for Specific Roles or Use Session Manager: Restrict SSH access to users with specific roles or utilize AWS Session Manager to manage instances without direct SSH access.
 
+# Neither instance should have had access to the secret recipes bucket. In the event that instance API credentials were compromised, how could we have prevented access to sensitive data?
 
-# Neither instance should have had access to the secret recipes bucket, in the even that instance API credentials were compromised how could we have prevented access to sensitive data.
-
-- Use least privilege access for the existing instance role profile to only allow access to specific buckets rather than using a wildcard selector. 
-- Enable server-side encryption on the S3 buckets
-- limit instances profile role that can access buckets
+- Use Least Privilege Access: Configure the instance role profile to grant access only to specific buckets necessary for the instance's operation, avoiding the use of wildcard selectors.
+- Enable Server-Side Encryption: Ensure all S3 buckets, especially those containing sensitive data, have server-side encryption enabled to protect data at rest.
+- Limit Instance Profile Roles: Restrict which instance profile roles can access sensitive buckets, ensuring only designated instances have the necessary permissions.
