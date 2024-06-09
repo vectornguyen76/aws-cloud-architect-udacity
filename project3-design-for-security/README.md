@@ -1,31 +1,61 @@
 # Cloud Security - Secure the Recipe Vault Web Application
 
-In this project, you will:
+## Table of Contents
 
-- Deploy and assess a simple web application environment’s security posture
-- Test the security of the environment by simulating attack scenarios and exploiting cloud configuration vulnerabilities
-- Implement monitoring to identify insecure configurations and malicious activity
-- Apply methods learned in the course to harden and secure the environment
-- Design a DevSecOps pipeline
+1. [Introduction](#introduction)
+2. [Dependencies and Prerequisites](#dependencies-and-prerequisites)
+   - [Access to AWS Account](#access-to-aws-account)
+   - [Installation of the AWS CLI and Local Setup of AWS API Keys](#installation-of-the-aws-cli-and-local-setup-of-aws-api-keys)
+   - [Local Setup of Git and GitHub Repository](#local-setup-of-git-and-github-repository)
+3. [Exercise 1 - Deploy Project Environment](#exercise-1---deploy-project-environment)
+   - [Task 1: Review Architecture Diagram](#task-1-review-architecture-diagram)
+   - [Task 2: Review CloudFormation Template](#task-2-review-cloudformation-template)
+   - [Task 3: Deployment of Initial Infrastructure](#task-3-deployment-of-initial-infrastructure)
+   - [Task 4: Identify Bad Practices](#task-4-identify-bad-practices)
+4. [Exercise 2 - Enable Security Monitoring](#exercise-2---enable-security-monitoring)
+   - [Task 1: Enable Security Monitoring using AWS Native Tools](#task-1-enable-security-monitoring-using-aws-native-tools)
+   - [Task 2: Identify and Triage Vulnerabilities](#task-2-identify-and-triage-vulnerabilities)
+5. [Exercise 3 - Attack Simulation](#exercise-3---attack-simulation)
+   - [Task 1: Brute Force Attack](#task-1-brute-force-attack)
+   - [Task 2: Accessing Secret Recipe Data File from S3](#task-2-accessing-secret-recipe-data-file-from-s3)
+6. [Exercise 4 - Implement Security Hardening](#exercise-4---implement-security-hardening)
+   - [Task 1: Remediation Plan](#task-1-remediation-plan)
+   - [Task 2: Hardening](#task-2-hardening)
+   - [Task 3: Check Monitoring Tools](#task-3-check-monitoring-tools)
+   - [Task 4: Questions and Analysis](#task-4-questions-and-analysis)
+   - [Optional Task 5 - Additional Hardening](#optional-task-5---additional-hardening)
+7. [Exercise 5 - Designing a DevSecOps Pipeline](#exercise-5---designing-a-devsecops-pipeline)
+   - [Task 1: Design a DevSecOps Pipeline](#task-1-design-a-devsecops-pipeline)
+   - [Task 2: Tools and Documentation](#task-2-tools-and-documentation)
+   - [Optional Task 3 - Scanning Infrastructure Code](#optional-task-3---scanning-infrastructure-code)
+8. [Exercise 6 - Clean up](#exercise-6---clean-up)
+
+## Introduction
+
+In this project, I will:
+
+- Deploy and assess a simple web application environment’s security posture.
+- Test the security of the environment by simulating attack scenarios and exploiting cloud configuration vulnerabilities.
+- Implement monitoring to identify insecure configurations and malicious activity.
+- Apply methods learned in the course to harden and secure the environment.
+- Design a DevSecOps pipeline.
 
 ## Dependencies and Prerequisites
 
-### Access to AWS account
+### Access to AWS Account
 
-Students will need to use either their personal AWS account or the federated user account provided by Udacity (if available to you). In either case, you need to track your usage and expenditure on [AWS Billing Dashboard](https://console.aws.amazon.com/billing/home#/) regularly. Remember, all AWS services are a pay-as-you-go service, so shut down/delete every AWS resource immediately after the usage or if you are stepping away for a few hours.
+I need to use either my personal AWS account or the federated user account provided by Udacity (if available). In either case, I should track my usage and expenditure on the [AWS Billing Dashboard](https://console.aws.amazon.com/billing/home#/) regularly. Remember, all AWS services are pay-as-you-go services, so shut down/delete every AWS resource immediately after usage or if stepping away for a few hours.
 
-### Installation of the AWS CLI and Local Setup of AWS API keys
+### Installation of the AWS CLI and Local Setup of AWS API Keys
 
-Instructions and examples in this project will make use of the AWS CLI in order to automate and reduce time and complexity.
-Refer to the below links to get the AWS CLI installed and configured in your local environment.
+Instructions and examples in this project will make use of the AWS CLI to automate and reduce time and complexity. Refer to the links below to get the AWS CLI installed and configured in my local environment:
 
-[Installing the CLI](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html)
+- [Installing the CLI](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html)
+- [Configuring the CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html)
 
-[Configuring the CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html)
+### Local Setup of Git and GitHub Repository
 
-### Local setup of git and GitHub Repository
-
-You will need to clone or download [this GitHub repo](https://github.com/udacity/nd063-c3-design-for-security-project-starter) in order to work on and submit this project.
+I will need to clone or download [this GitHub repo](https://github.com/udacity/nd063-c3-design-for-security-project-starter) to work on and submit this project.
 
 ## Exercise 1 - Deploy Project Environment
 
@@ -139,7 +169,7 @@ https://console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks
 
 Obtain the name of the S3 bucket by navigating to the Outputs section of the stack:
 
-![Outputs Section](s3stack_output.png)
+![Outputs Section](starter/s3stack_output.png)
 
 Note down the names of the two other buckets that have been created, one for free recipes and one for secret recipes. You will need the bucket names to upload example recipe data to the buckets and to run the attack scripts.
 
@@ -310,7 +340,7 @@ Imagine a scenario where API keys used by the application server to read data fr
 aws s3 ls  s3://<BucketNameRecipesSecret>/ --region us-east-1
 
 # download the files
-aws s3 cp s3://cand-c3-secret-recipes-431766885376/secret_recipe.txt  .  --region us-east-1
+aws s3 cp s3://<BucketNameRecipesSecret>/secret_recipe.txt  .  --region us-east-1
 
 # view contents of the file
 cat secret_recipe.txt
@@ -453,7 +483,7 @@ Submit your answers in E4T4.txt.
 
 - **E4T4.txt** - Answers from prompts in Exercise 4, Task 4.
 
-### _Optional Standout Suggestion_ Task 5 - Additional Hardening
+### _Optional_ Task 5 - Additional Hardening
 
 Make changes to the environment by updating the cloud formation template. You would do this by copying c3-app.yml and c3-s3.yml and putting your new code into c3-app_solution.yml and c3-s3_solution.yml.
 Brainstorm and list additional hardening suggestions aside from those implemented that would protect the data in this environment. Submit your answers in E4T5.txt.
@@ -515,7 +545,7 @@ Submit your answers in E5T2.txt
 
 - **E5T2.txt** - Answer from prompts in Exercise 5, Task 2.
 
-### _Optional Standout Suggestion_ Task 3 - Scanning Infrastructure Code
+### _Optional_ Task 3 - Scanning Infrastructure Code
 
 - Run an infrastructure as code scanning tool on the cloud formation templates provided in the starter.
 - Take a screenshot of the tool that has correctly identified bad practices.
@@ -533,7 +563,3 @@ Once your project has been submitted and reviewed - to prevent undesired charges
 - Disable Security Hub and Guard Duty.
 - Delete recipe files uploaded to the S3 buckets.
 - Delete your cloud formation stacks.
-
-## _Optional Standout Suggestion_ Exercise 7 - Enjoying the Spoils of Your Good Security Work!
-
-Bake one of the desserts from the recipe text files and submit a picture. :-)
